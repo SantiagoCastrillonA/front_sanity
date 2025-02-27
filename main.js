@@ -108,3 +108,231 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Elementos del DOM
+  const sidebar = document.getElementById('sidebar');
+  const openSidebarBtn = document.getElementById('open-sidebar');
+  const closeSidebarBtn = document.getElementById('close-sidebar');
+  const chatInput = document.getElementById('chat-input');
+  const sendButton = document.getElementById('send-button');
+  const chatMessages = document.getElementById('chat-messages');
+  const newChatBtn = document.getElementById('new-chat');
+  const historyList = document.getElementById('history-list');
+
+  // Abrir sidebar
+  openSidebarBtn.addEventListener('click', () => {
+      sidebar.classList.add('active');
+  });
+
+  // Cerrar sidebar
+  closeSidebarBtn.addEventListener('click', () => {
+      sidebar.classList.remove('active');
+  });
+
+  // Hacer crecer el textarea al escribir
+  chatInput.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = (this.scrollHeight) + 'px';
+      
+      // Limitar altura máxima
+      if (this.scrollHeight > 150) {
+          this.style.height = '150px';
+          this.style.overflowY = 'auto';
+      } else {
+          this.style.overflowY = 'hidden';
+      }
+  });
+
+  // Enviar mensaje con Enter (pero nueva línea con Shift+Enter)
+  chatInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+      }
+  });
+
+  // Enviar mensaje con el botón
+  sendButton.addEventListener('click', sendMessage);
+
+  // Función para enviar mensaje
+  function sendMessage() {
+      const message = chatInput.value.trim();
+      if (message) {
+          // Agregar mensaje del usuario al chat
+          addMessageToChat('user', message);
+          
+          // Limpiar y resetear el input
+          chatInput.value = '';
+          chatInput.style.height = 'auto';
+          
+          // Simular respuesta del asistente (en una aplicación real, aquí se conectaría con la IA)
+          setTimeout(() => {
+              simulateAssistantResponse(message);
+          }, 1000);
+          
+          // Guardar en el historial
+          saveToHistory(message);
+      }
+  }
+
+  // Función para agregar mensaje al chat
+  function addMessageToChat(sender, content) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', sender);
+      
+      const messageContent = document.createElement('div');
+      messageContent.classList.add('message-content');
+      
+      // Convertir saltos de línea a <br>
+      content = content.replace(/\n/g, '<br>');
+      
+      messageContent.innerHTML = `<p>${content}</p>`;
+      messageDiv.appendChild(messageContent);
+      
+      chatMessages.appendChild(messageDiv);
+      
+      // Scroll automático hacia abajo
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Función para simular respuesta del asistente (esto sería reemplazado por la IA real)
+  function simulateAssistantResponse(userMessage) {
+      // Simulación básica de respuestas
+      let response;
+      
+      if (userMessage.toLowerCase().includes('hola') || userMessage.toLowerCase().includes('buenos días')) {
+          response = "Hola, ¿cómo estás hoy? Estoy aquí para escucharte y ayudarte en lo que necesites.";
+      } 
+      else if (userMessage.toLowerCase().includes('ansiedad') || userMessage.toLowerCase().includes('ansioso')) {
+          response = "La ansiedad es una respuesta natural del cuerpo ante situaciones de estrés. Podemos hablar sobre técnicas de respiración y mindfulness que pueden ayudarte a manejarla. ¿Te gustaría explorar algunas técnicas?";
+      }
+      else if (userMessage.toLowerCase().includes('triste') || userMessage.toLowerCase().includes('deprimido')) {
+          response = "Siento que estés pasando por un momento difícil. Es importante que sepas que no estás solo/a. ¿Podrías contarme un poco más sobre cómo te sientes?";
+      }
+      else {
+          response = "Gracias por compartir eso conmigo. Estoy aquí para escucharte y apoyarte. ¿Hay algo específico en lo que te gustaría que nos enfoquemos hoy?";
+      }
+      
+      addMessageToChat('assistant', response);
+  }
+
+  // Función para guardar en historial
+  function saveToHistory(firstMessage) {
+      const now = new Date();
+      const time = now.getHours() + ':' + (now.getMinutes() < 10 ? '0' : '') + now.getMinutes();
+      const date = now.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric' });
+      
+      const truncatedMessage = firstMessage.length > 30 ? 
+          firstMessage.substring(0, 30) + '...' : 
+          firstMessage;
+      
+      const historyItem = document.createElement('div');
+      historyItem.classList.add('history-item');
+      historyItem.innerHTML = `
+          <span>${truncatedMessage}</span>
+          <span class="history-date">${date}, ${time}</span>
+      `;
+      
+      // Hacer clic en un elemento del historial (simulación)
+      historyItem.addEventListener('click', () => {
+          // En una app real, aquí se cargaría la conversación correspondiente
+          alert('Cargar conversación: ' + truncatedMessage);
+      });
+      
+      // Agregar al inicio de la lista
+      historyList.insertBefore(historyItem, historyList.firstChild);
+  }
+
+  // Nueva conversación
+  newChatBtn.addEventListener('click', () => {
+      // Limpiar mensajes actuales
+      chatMessages.innerHTML = `
+          <div class="message assistant">
+              <div class="message-content">
+                  <p>Hola, soy tu asistente de salud mental. ¿En qué puedo ayudarte hoy?</p>
+              </div>
+          </div>
+      `;
+      
+      // En móvil, cerrar el sidebar al iniciar una nueva conversación
+      if (window.innerWidth <= 768) {
+          sidebar.classList.remove('active');
+      }
+  });
+
+  // Detectar cambios de tamaño de pantalla para manejar el sidebar
+  window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+          sidebar.classList.remove('active'); // Resetear clase en desktop
+      }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const sidebar = document.querySelector('.sidebar');
+  const chatContainer = document.querySelector('.chat-container');
+  
+  // Función para cerrar el sidebar cuando el mouse sale
+  sidebar.addEventListener('mouseleave', function() {
+      sidebar.style.left = '-280px';
+      chatContainer.classList.remove('sidebar-open');
+  });
+
+  // Función para abrir el sidebar cuando el mouse entra
+  sidebar.addEventListener('mouseenter', function() {
+      sidebar.style.left = '0';
+      chatContainer.classList.add('sidebar-open');
+  });
+});
+
+
+/* filepath: /d:/Santiago/Documentos/Sena/dev/Arle/Trimestre 4/front_sanity_2/main.js */
+document.addEventListener('DOMContentLoaded', function() {
+  const sidebar = document.getElementById('sidebar');
+  const mainContent = document.querySelector('.main-content');
+
+  // Mostrar sidebar al pasar el mouse
+  sidebar.addEventListener('mouseenter', function() {
+      mainContent.classList.add('shifted');
+  });
+
+  // Ocultar sidebar al quitar el mouse
+  sidebar.addEventListener('mouseleave', function() {
+      mainContent.classList.remove('shifted');
+  });
+
+  // Cerrar sidebar con el botón X
+  document.getElementById('close-sidebar').addEventListener('click', function() {
+      mainContent.classList.remove('shifted');
+  });
+
+  // Prevenir que el sidebar se cierre al interactuar con sus elementos
+  sidebar.querySelectorAll('.history-item, .new-chat-btn').forEach(element => {
+      element.addEventListener('click', function(e) {
+          e.stopPropagation();
+      });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const chatHistory = document.getElementById("chat-history");
+  const closeButton = document.getElementById("close-history");
+  
+  if (chatHistory && closeButton) {
+      // Alternar la visibilidad del historial de chats al hacer clic en el botón
+      closeButton.addEventListener("click", function () {
+          chatHistory.classList.toggle("hidden");
+      });
+
+      // Mostrar el historial al pasar el cursor por encima
+      chatHistory.addEventListener("mouseenter", function () {
+          chatHistory.classList.remove("hidden");
+      });
+
+      // Ocultar el historial al sacar el cursor
+      chatHistory.addEventListener("mouseleave", function () {
+          chatHistory.classList.add("hidden");
+      });
+  }
+});
