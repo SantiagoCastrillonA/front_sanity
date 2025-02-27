@@ -285,6 +285,67 @@ document.addEventListener("DOMContentLoaded", function () {
       sidebar.classList.remove("active"); // Resetear clase en desktop
     }
   });
+
+  // Funcionalidad para el historial del chat
+  let chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
+
+  // Función para guardar un nuevo mensaje en el historial
+  function saveMessage(message, sender) {
+    const newMessage = {
+      text: message,
+      sender: sender,
+      timestamp: new Date().toISOString(),
+    };
+
+    chatHistory.push(newMessage);
+    localStorage.setItem("chatHistory", JSON.stringify(chatHistory));
+    updateHistoryList();
+  }
+
+  // Función para actualizar la lista del historial
+  function updateHistoryList() {
+    if (!historyList) return;
+
+    historyList.innerHTML = "";
+    chatHistory.forEach((message, index) => {
+      const historyItem = document.createElement("div");
+      historyItem.classList.add("history-item");
+      historyItem.innerHTML = `
+                <p class="history-text">${message.text.substring(0, 30)}...</p>
+                <p class="history-date">${new Date(message.timestamp).toLocaleDateString()}</p>
+            `;
+      historyItem.addEventListener("click", () => loadChat(index));
+      historyList.appendChild(historyItem);
+    });
+  }
+
+  // Función para cargar un chat específico
+  function loadChat(index) {
+    if (!chatMessages) return;
+
+    const chat = chatHistory[index];
+    chatMessages.innerHTML = ""; // Limpia el chat actual
+
+    // Agrega el mensaje seleccionado
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("message", chat.sender);
+    messageDiv.innerHTML = `<p>${chat.text}</p>`;
+    chatMessages.appendChild(messageDiv);
+  }
+
+  // Cargar el historial al inicio
+  updateHistoryList();
+
+  // Agregar evento al enviar mensaje
+  if (sendButton && chatInput) {
+    sendButton.addEventListener("click", function () {
+      const message = chatInput.value.trim();
+      if (message) {
+        saveMessage(message, "user");
+        chatInput.value = "";
+      }
+    });
+  }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -304,36 +365,59 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-/* filepath: /d:/Santiago/Documentos/Sena/dev/Arle/Trimestre 4/front_sanity_2/main.js */
 document.addEventListener("DOMContentLoaded", function () {
   const sidebar = document.getElementById("sidebar");
   const mainContent = document.querySelector(".main-content");
+  const closeSidebarBtn = document.getElementById("close-sidebar");
+  const openSidebarBtn = document.getElementById("open-sidebar");
 
-  // Mostrar sidebar al pasar el mouse
-  sidebar.addEventListener("mouseenter", function () {
+  // Función para abrir el sidebar
+  function openSidebar() {
+    sidebar.style.left = "0";
     mainContent.classList.add("shifted");
-  });
+  }
 
-  // Ocultar sidebar al quitar el mouse
-  sidebar.addEventListener("mouseleave", function () {
+  // Función para cerrar el sidebar
+  function closeSidebar() {
+    sidebar.style.left = "-280px";
     mainContent.classList.remove("shifted");
+  }
+
+  // Event listeners para los botones
+  if (openSidebarBtn) {
+    openSidebarBtn.addEventListener("click", openSidebar);
+  }
+
+  if (closeSidebarBtn) {
+    closeSidebarBtn.addEventListener("click", closeSidebar);
+  }
+
+  // Eventos de hover
+  if (sidebar) {
+    sidebar.addEventListener("mouseenter", function() {
+      openSidebar();
+    });
+
+    sidebar.addEventListener("mouseleave", function() {
+      closeSidebar();
+    });
+  }
+
+  // Prevenir cierre al interactuar con elementos del sidebar
+  const historyItems = sidebar.querySelectorAll(".history-item");
+  const newChatBtn = sidebar.querySelector(".new-chat-btn");
+
+  const preventClose = (e) => {
+    e.stopPropagation();
+  };
+
+  historyItems.forEach(item => {
+    item.addEventListener("click", preventClose);
   });
 
-  // Cerrar sidebar con el botón X
-  document
-    .getElementById("close-sidebar")
-    .addEventListener("click", function () {
-      mainContent.classList.remove("shifted");
-    });
-
-  // Prevenir que el sidebar se cierre al interactuar con sus elementos
-  sidebar
-    .querySelectorAll(".history-item, .new-chat-btn")
-    .forEach((element) => {
-      element.addEventListener("click", function (e) {
-        e.stopPropagation();
-      });
-    });
+  if (newChatBtn) {
+    newChatBtn.addEventListener("click", preventClose);
+  }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
