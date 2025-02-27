@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Álbum de Recuerdos</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="img/terapia.png" alt="Sanity Logo">
+                <h1>SANITY</h1>
+            </a>
+        </div>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+
+    <div class="menu">
+        <div class="menu-section">
+            <h2>ÁLBUM DE RECUERDOS</h2>
+            <div class="menu-item">
+                <a href="album_recuerdos.html">Fotos por Día</a>
+            </div>
+            <div class="menu-item"><a href="#">Parte escrita del álbum</a></div>
+            <div class="menu-item"><a href="#">Collage de fotos mensuales</a></div>
+        </div>
+
+        <div class="menu-section">
+            <h2>CHAT CON IA</h2>
+            <div class="menu-item">Chat Interactivo</div>
+            <div class="menu-item">Sugerencias de actividades</div>
+            <div class="menu-item">Historial de conversaciones</div>
+            <div class="emergency-button">Botón de emergencia</div>
+        </div>
+
+        <div class="menu-section">
+            <h2>AYUDA PROFESIONAL</h2>
+            <div class="menu-item">Directorio de psicólogos</div>
+            <div class="menu-item">Agendamiento de consulta</div>
+            <div class="menu-item">Servicio inmediato</div>
+        </div>
+
+        <div class="menu-section">
+            <h2>CUENTA</h2>
+            <div class="menu-item">Mi perfil</div>
+            <div class="menu-item">Ajustes</div>
+            <div class="menu-item">Información adicional</div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <h1>Álbum de Recuerdos</h1>
+
+        <section class="album">
+            <div class="photo-grid">
+                <!-- Ejemplo de estructura para fotos -->
+                <div class="photo-card">
+                    <img src="img\recuerdo1.jpg" alt="Recuerdo 1">
+                    <p class="photo-description">Descripción del recuerdo</p>
+                </div>
+                <div class="photo-card">
+                    <img src="img\recuerdo2.jpg" alt="Recuerdo 2">
+                    <p class="photo-description">Descripción del recuerdo</p>
+                </div>
+                <div class="photo-card">
+                    <img src="img\recuerdo3.jpg" alt="Recuerdo 3">
+                    <p class="photo-description">Descripción del recuerdo</p>
+                </div>
+                <div class="photo-card">
+                    <img src="img\recuerdo3.jpg" alt="Recuerdo 3">
+                    <p class="photo-description">Descripción del recuerdo</p>
+                </div>
+                <div class="photo-card">
+                    <img src="img\recuerdo3.jpg" alt="Recuerdo 3">
+                    <p class="photo-description">Descripción del recuerdo</p>
+                </div>
+                <div class="photo-card">
+                    <img src="img\recuerdo3.jpg" alt="Recuerdo 3">
+                    <p class="photo-description">Descripción del recuerdo</p>
+                </div>
+                <!-- Puedes agregar más photo-cards aquí -->
+            </div>
+        </section>
+    </div>
+        <div class="lightbox" id="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="lightbox-caption"></div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div>Términos y condiciones</div>
+            <div>Copyright</div>
+            <div>Redes sociales</div>
+        </div>
+    </footer>
+</body>
+</html>
