@@ -2,6 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: italic;
 }
 
 body {
@@ -442,15 +444,19 @@ body {
 
 .hero h2 {
   font-size: 300%;
-  color: #091f0b;
-  font-family: sans-serif;
+  color: #88d688;
+  font-family: "Playwrite HU", cursive;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
 }
 
 .hero p {
   font-size: 190%;
-  font-family: sans-serif;
   color: #ffffff;
-  margin-bottom: 30%;
+  margin-bottom: 5%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-optical-sizing: auto;
 }
 
 .about {
@@ -460,6 +466,10 @@ body {
   align-items: center;
   justify-content: center;
   padding: 4rem 2rem;
+  font-family: "Playwrite HU", cursive;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
 }
 
 .about-background {
@@ -495,6 +505,7 @@ body {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: "Playwrite HU", cursive;
 }
 
 .about-content p {
@@ -533,6 +544,11 @@ body {
   overflow: hidden;
   padding: 4rem 2rem;
   background-color: #c4e2db;
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
 
 .testimonials-content {
@@ -548,6 +564,7 @@ body {
   margin-bottom: 3rem;
   color: #000000;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: "Playwrite HU", cursive;
 }
 
 .testimonial-cards {
@@ -639,9 +656,12 @@ body {
   border: none;
   border-radius: 25px;
   font-size: 1.1rem;
-  /* margin-bottom: 10%; */
   cursor: pointer;
   transition: background 0.3s ease;
+  font-family: "Playwrite HU", cursive;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
 }
 
 .cta-button:hover {
@@ -1026,7 +1046,7 @@ footer {
   height: calc(100vh - 70px);
   background-color: white;
   transition: left 0.3s ease;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   padding: 20px;
 }

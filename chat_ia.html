@@ -2,58 +2,41 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asistente de Salud Mental</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="main.js" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="components/loader.js"></script>
 </head>
 
 <body>
 
-    <nav class="navbar">
-        <div class="logo-container">
-            <img src="img\terapia.png" alt="Sanity Logo">
-            <h1>SANITY</h1>
-        
-        <div class="menu">
-            <div class="menu-section">
-                <h2>ÁLBUM DE RECUERDOS</h2>
-                <div class="menu-item">
-                    <a href="recuerdos.html">Fotos por Día</a>
-                </div>
-            </div>
-        
-            <div class="menu-section">
-                <h2>CHAT CON IA</h2>
-                <div class="menu-item">
-                    <a href="chat_ia.html">Chat Interactivo</a>
-                </div>
-                <div class="emergency-button">Botón de emergencia</div>
-            </div>
-        
-            <div class="menu-section">
-                <h2>AYUDA PROFESIONAL</h2>
-                <div class="menu-item">Directorio de psicólogos</div>
-                <div class="menu-item">Agendamiento de consulta</div>
-                <div class="menu-item">Servicio inmediato</div>
-            </div>
-        
-            <div class="menu-section">
-                <h2>CUENTA</h2>
-                <div class="menu-item">Mi perfil</div>
-                <div class="menu-item">Ajustes</div>
-                <div class="menu-item">Información adicional</div>
+    <div class="menu">
+        <div class="menu-section">
+            <h2>ÁLBUM DE RECUERDOS</h2>
+            <div class="menu-item">
+                <a href="recuerdos.html">Fotos por Día</a>
             </div>
         </div>
 
-        <div class="hamburger" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="menu-section">
+            <h2>CHAT CON IA</h2>
+            <div class="menu-item">
+                <a href="chat_ia.html">Chat Interactivo</a>
+            </div>
+            <div class="emergency-button">Botón de emergencia</div>
         </div>
-    </nav>
+
+        <div class="menu-section">
+            <h2>AYUDA PROFESIONAL</h2>
+            <div class="menu-item">Directorio de psicólogos</div>
+            <div class="menu-item">Agendamiento de consulta</div>
+            <div class="menu-item">Servicio inmediato</div>
+        </div>
+
+        <div class="menu-section">
+            <h2>CUENTA</h2>
+            <div class="menu-item">Mi perfil</div>
+            <div class="menu-item">Ajustes</div>
+            <div class="menu-item">Información adicional</div>
+        </div>
+    </div>
 
     <div class="chat-container">
         <!-- Sidebar con historial de chat -->
@@ -64,7 +47,6 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <!-- ... resto del contenido del sidebar ... -->
         </div>
 
         <!-- Contenido principal del chat -->
@@ -94,7 +76,6 @@
         </div>
     </div>
 
-    <script src="main.js"></script>
 </body>
 
 </html>

@@ -312,7 +312,9 @@ document.addEventListener("DOMContentLoaded", function () {
       historyItem.classList.add("history-item");
       historyItem.innerHTML = `
                 <p class="history-text">${message.text.substring(0, 30)}...</p>
-                <p class="history-date">${new Date(message.timestamp).toLocaleDateString()}</p>
+                <p class="history-date">${new Date(
+                  message.timestamp
+                ).toLocaleDateString()}</p>
             `;
       historyItem.addEventListener("click", () => loadChat(index));
       historyList.appendChild(historyItem);
@@ -394,11 +396,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Eventos de hover
   if (sidebar) {
-    sidebar.addEventListener("mouseenter", function() {
+    sidebar.addEventListener("mouseenter", function () {
       openSidebar();
     });
 
-    sidebar.addEventListener("mouseleave", function() {
+    sidebar.addEventListener("mouseleave", function () {
       closeSidebar();
     });
   }
@@ -411,7 +413,7 @@ document.addEventListener("DOMContentLoaded", function () {
     e.stopPropagation();
   };
 
-  historyItems.forEach(item => {
+  historyItems.forEach((item) => {
     item.addEventListener("click", preventClose);
   });
 
