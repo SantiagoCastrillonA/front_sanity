@@ -28,6 +28,12 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         document.querySelector(".navbar").insertAdjacentHTML("afterend", data);
       }),
+    // Cargar psicologos 
+    fetch("components/psicologos.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.querySelector(".navbar").insertAdjacentHTML("afterend", data);
+      }),
 
     // Cargar footer
     fetch("components/footer.html")
